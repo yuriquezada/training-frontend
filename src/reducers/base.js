@@ -104,7 +104,6 @@ export default function createDuck({ namespace, store, initialState = {}, creato
       'PUT_FULFILLED',
       'PUT_FAILURE',
       'PUT_CANCEL',
-      'PUT',
       'POST',
       'POST_PENDING',
       'POST_FULFILLED',

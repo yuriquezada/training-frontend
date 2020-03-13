@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import loadable from '@loadable/component'
 
@@ -13,13 +13,21 @@ const Home = loadable(() => import('../containers/Home'), {
   fallback: <Loading />
 })
 
+const Comment = loadable(() => import('../containers/Comment'), {
+  fallback: <Loading />
+})
+
 export default history => {
-  const pathUrl = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : '/'
+  const pathUrl = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ''
+  console.log('process.env.PUBLIC_URL', process.env.PUBLIC_URL)
 
   return (
     <ConnectedRouter history={history}>
       <Dashboard history={history}>
-        <Route component={Home} exact path={pathUrl} />
+        <Switch>
+          <Route component={Home} exact path={`${pathUrl}/`} />
+          <Route component={Comment} exact path={`${pathUrl}/comment/:id`} />
+        </Switch>
       </Dashboard>
     </ConnectedRouter>
   )

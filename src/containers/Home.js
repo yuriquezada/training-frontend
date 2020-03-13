@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
   post: {
     cursor: 'pointer',
     margin: theme.spacing(1)
+  },
+  root: {
+    padding: theme.spacing(4)
   }
 }))
 
@@ -29,7 +32,7 @@ export default function Home({ history }) {
   }
 
   return (
-    <Grid container>
+    <Grid className={classes.root} container>
       {
         posts.data.map(post => (
           <Grid

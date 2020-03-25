@@ -3,14 +3,14 @@ import { Get } from 'lib/Request'
 const router = express.Router()
 // axios
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const data = await Get('https://jsonplaceholder.typicode.com/posts')
-//     res.json({ data, success: true })
-//   } catch (error) {
-//     res.sendStatus(500).json({ success: false })
-//   }
-// })
+router.get('/', async (req, res) => {
+  try {
+    const data = await Get('https://jsonplaceholder.typicode.com/users')
+    res.json({ data, success: true })
+  } catch (error) {
+    res.sendStatus(500).json({ success: false })
+  }
+})
 
 router.get('/:id/posts', async (req, res) => {
   try {

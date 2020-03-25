@@ -1,6 +1,6 @@
 import base from 'reducers/base'
 
-import { getPostsByUser } from './sagas'
+import { getUsers } from './sagas'
 import { takeEvery } from 'redux-saga/effects'
 
 export default base({
@@ -8,16 +8,18 @@ export default base({
     data: []
   },
   namespace: 'crassa',
-  store    : 'posts'
+  store    : 'users'
 }).extend({
   creators: ({ types }) => ({
-    getPostsByUser: id => ({ id, type: types.FETCH }),
-    resetPosts    : () => ({ type: types.RESET })
+    getUsers: () => ({ type: types.FETCH })
   }),
   sagas: duck => ({
-    getPostsByUser: getPostsByUser(duck)
+    getUsers: getUsers(duck)
+  }),
+  selectors: ({ store }) => ({
+    getUsers: state => state[store].items
   }),
   takes: (duck) => ([
-    takeEvery(duck.types.FETCH, duck.sagas.getPostsByUser)
+    takeEvery(duck.types.FETCH, duck.sagas.getUsers)
   ])
 })

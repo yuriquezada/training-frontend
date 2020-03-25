@@ -3,11 +3,11 @@ import { call, put } from 'redux-saga/effects'
 
 import { Get } from 'lib/Request'
 
-export const getPostsByUser = ({ types }) => function* ({ id }) {
+export const getUsers = ({ types }) => function* () {
   try {
     yield put({ type: types.FETCH_PENDING })
 
-    const payload = yield call(Get, `users/${id}/posts`)
+    const payload = yield call(Get, 'users')
 
     yield put({ payload, type: types.FETCH_FULFILLED })
   } catch (err) {

@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Card, CardContent, Grid, CardActions, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import postsDucks from 'reducers/posts'
+import usersDucks from 'reducers/users'
 
-const { getPosts } = postsDucks.creators
+const { getUsers } = usersDucks.creators
 
 const useStyles = makeStyles(theme => ({
-  post: {
-    cursor: 'pointer',
-    margin: theme.spacing(1)
-  },
   root: {
     padding: theme.spacing(4)
+  },
+  user: {
+    cursor: 'pointer',
+    margin: theme.spacing(1)
   }
 }))
 
@@ -21,35 +21,35 @@ export default function Home({ history }) {
   const dispatch = useDispatch()
   const classes = useStyles()
 
-  const posts = useSelector(state => state.posts)
+  const users = useSelector(state => state.users)
 
   React.useEffect(()=> {
-    dispatch(getPosts())
+    dispatch(getUsers())
   },[])
 
-  const _handleClickPost = (id) => () => {
-    history.push(`/comment/${id}`)
+  const _handleClickUser = (id) => () => {
+    history.push(`/posts/${id}`)
   }
 
   return (
     <Grid className={classes.root} container>
       {
-        posts.data.map(post => (
+        users.data.map(user => (
           <Grid
             item
-            key={`post-${post.id}`}
+            key={`user-${user.id}`}
             lg={4}
             md={6}
             xs={12}>
-            <Card className={classes.post}>
+            <Card className={classes.user}>
               <CardContent>
-                <Typography variant='h5'>{post.title}</Typography>
+                <Typography variant='h5'>{user.username}</Typography>
                 <CardActions>
                   <Button
                     color='primary'
-                    onClick={_handleClickPost(post.id)}
+                    onClick={_handleClickUser(user.id)}
                     variant='outlined'>
-                    Ver comentarios
+                    Ver publicaciones
                   </Button>
                 </CardActions>
               </CardContent>

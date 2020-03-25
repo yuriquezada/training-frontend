@@ -2,9 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography, Grid, Card, CardContent, makeStyles, Button } from '@material-ui/core'
 
-import commentsDucks  from 'reducers/comments'
+import postsDucks  from 'reducers/posts'
 
-const { getCommentsByPost, resetComments } = commentsDucks.creators
+const { getPostsByUser, resetPosts } = postsDucks.creators
 
 const useStyles = makeStyles(({ spacing }) =>({
   root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(({ spacing }) =>({
   }
 }))
 
-export default function Comment(props) {
+export default function Post(props) {
   const dispatch = useDispatch()
   const {
     match: {
@@ -25,13 +25,13 @@ export default function Comment(props) {
 
   const classes = useStyles()
 
-  const comments = useSelector(state => state.comments)
+  const posts = useSelector(state => state.posts)
 
   React.useEffect(() => {
-    dispatch(getCommentsByPost(id))
+    dispatch(getPostsByUser(id))
 
     return () => {
-      dispatch(resetComments())
+      dispatch(resetPosts())
     }
   }, [])
 
@@ -42,11 +42,11 @@ export default function Comment(props) {
   return (
     <Grid className={classes.root} container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant='h4'>Comments By {id}:</Typography>
+        <Typography variant='h4'>Posts By {id}:</Typography>
         <Button onClick={_handleClickBack} variant='outlined' >Ir atrás</Button>
       </Grid>
       {
-        comments.status === 'LOADING' && (
+        posts.status === 'LOADING' && (
           <Grid
             container
             item
@@ -57,17 +57,16 @@ export default function Comment(props) {
         )
       }
       {
-        comments.data.map(({ id, name, email, body }) => (
+        posts.data.map(({ id, title, body }) => (
           <Grid
             item
-            key={`comment-${id}`}
+            key={`post-${id}`}
             lg={3}
             md={4}
             xs={12}>
             <Card>
               <CardContent>
-                <Typography>Name: {name}</Typography>
-                <Typography>Email: {email}</Typography>
+                <Typography>Titulo: {title}</Typography>
                 <Typography>Body: {body}</Typography>
               </CardContent>
             </Card>

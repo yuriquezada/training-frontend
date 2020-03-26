@@ -13,7 +13,7 @@ const Home = loadable(() => import('../containers/Home'), {
   fallback: <Loading />
 })
 
-const Posts = loadable(() => import('../containers/Post'), {
+const Post = loadable(() => import('../containers/Post'), {
   fallback: <Loading />
 })
 
@@ -30,8 +30,8 @@ export default history => {
       <Dashboard history={history}>
         <Switch>
           <Route component={Home} exact path={`${pathUrl}/`} />
-          <Route component={Posts} exact path={`${pathUrl}/posts/:id`} />
-          <Route component={Comment} exact path={`${pathUrl}/posts/:id/comment/:id`} />
+          <Route component={Post} exact path={`${pathUrl}/user:id/posts`} />
+          <Route component={Comment} exact path={`${pathUrl}/post:id/comments`} />
         </Switch>
       </Dashboard>
     </ConnectedRouter>

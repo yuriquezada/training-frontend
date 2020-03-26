@@ -42,7 +42,7 @@ export default function Comment(props) {
   return (
     <Grid className={classes.root} container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant='h4'>Comments By {id}:</Typography>
+        <Typography variant='h4'>Comments By Post {id}:</Typography>
         <Button onClick={_handleClickBack} variant='outlined' >Ir atrás</Button>
       </Grid>
       {

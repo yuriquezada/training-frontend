@@ -28,7 +28,7 @@ export default function Home({ history }) {
   },[])
 
   const _handleClickUser = (id) => () => {
-    history.push(`/posts/${id}`)
+    history.push(`/user${id}/posts`)
   }
 
   return (

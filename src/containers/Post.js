@@ -34,7 +34,9 @@ export default function Post(props) {
       dispatch(resetPosts())
     }
   }, [])
-
+  const _handleClickPost = (id) => () => {
+    history.push(`/post${id}/comments`)
+  }
   const _handleClickBack = () => {
     history.push('/')
   }
@@ -42,7 +44,7 @@ export default function Post(props) {
   return (
     <Grid className={classes.root} container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant='h4'>Posts By {id}:</Typography>
+        <Typography variant='h4'>Posts By User {id}:</Typography>
         <Button onClick={_handleClickBack} variant='outlined' >Ir atrás</Button>
       </Grid>
       {
@@ -68,6 +70,12 @@ export default function Post(props) {
               <CardContent>
                 <Typography>Titulo: {title}</Typography>
                 <Typography>Body: {body}</Typography>
+                <Button
+                  color='primary'
+                  onClick={_handleClickPost(id)}
+                  variant='outlined'>
+                    Ver comentarios
+                </Button>
               </CardContent>
             </Card>
           </Grid>

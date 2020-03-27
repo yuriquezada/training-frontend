@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const data = await Get(`https://jsonplaceholder.typicode.com/posts${id}/comments`)
+    const data = await Get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
     res.json({ data, success: true })
   } catch (error) {
     res.sendStatus(500).json({ success: false })

@@ -22,14 +22,19 @@ export default function Home({ history }) {
   const classes = useStyles()
 
   const users = useSelector(state => state.users)
+  // console.log(users.data)
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     dispatch(getUsers())
-  },[])
+  }, [])
 
   const _handleClickUser = (id) => () => {
     history.push(`/user${id}/posts`)
   }
+  const _handleClickUserProfile = (id) => () => {
+    history.push(`/user${id}`)
+  }
+  console.log(users.data)
 
   return (
     <Grid className={classes.root} container>
@@ -50,6 +55,12 @@ export default function Home({ history }) {
                     onClick={_handleClickUser(user.id)}
                     variant='outlined'>
                     Ver publicaciones
+                  </Button>
+                  <Button
+                    color='primary'
+                    onClick={_handleClickUserProfile(user.id)}
+                    variant='outlined'>
+                    Ver perfil
                   </Button>
                 </CardActions>
               </CardContent>

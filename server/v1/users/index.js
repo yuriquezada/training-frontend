@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const data = await Get(`https://jsonplaceholder.typicode.com/users/${id}`)
+    res.json({ data, success: true })
+  } catch (error) {
+    res.sendStatus(500).json({ success: false })
+  }
+})
+
 router.get('/:id/posts', async (req, res) => {
   try {
     const { id } = req.params

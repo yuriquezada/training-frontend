@@ -2,11 +2,11 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography, Grid, Card, CardContent, makeStyles, Button } from '@material-ui/core'
 
-import profileDucks  from 'reducers/profile'
+import profileDucks from 'reducers/profile'
 
 const { getProfileByUser, resetProfile } = profileDucks.creators
 
-const useStyles = makeStyles(({ spacing }) =>({
+const useStyles = makeStyles(({ spacing }) => ({
   root: {
     padding: spacing(4)
   }
@@ -26,7 +26,7 @@ export default function Profile(props) {
   const classes = useStyles()
 
   const profile = useSelector(state => state.profile)
-  console.log(profile.data)
+
   React.useEffect(() => {
     dispatch(getProfileByUser(id))
 
@@ -34,6 +34,7 @@ export default function Profile(props) {
       dispatch(resetProfile())
     }
   }, [])
+
   const _handleClickProfile = (id) => () => {
     history.push(`/user${id}/posts`)
   }
@@ -41,7 +42,10 @@ export default function Profile(props) {
     history.push('/')
   }
 
-  // const miobjeto =
+  const profileData = []
+  profileData.push(profile.data)
+  console.log('Este es el profile.data')
+  console.log(profile.data)
 
   return (
     <Grid className={classes.root} container spacing={2}>
@@ -61,25 +65,27 @@ export default function Profile(props) {
         )
       }
       {
-        <Grid
-          item
-          key={`user-${profile.data.id}`}
-          lg={3}
-          md={4}
-          xs={12}>
-          <Card>
-            <CardContent>
-              <Typography>Nombre: {profile.data.name}</Typography>
-              <Typography>Nombre de usuario: {profile.data.username}</Typography>
-              <Button
-                color='primary'
-                onClick={_handleClickProfile(profile.data.id)}
-                variant='outlined'>
-              Ver publicaciones
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
+        profileData.map(({ id, name, username }) => (
+          <Grid
+            item
+            key={`user-${id}`}
+            lg={3}
+            md={4}
+            xs={12}>
+            <Card>
+              <CardContent>
+                <Typography>Nombre: {name}</Typography>
+                <Typography>Nombre de usuario: {username}</Typography>
+                <Button
+                  color='primary'
+                  onClick={_handleClickProfile(id)}
+                  variant='outlined'>
+                  Ver publicaciones
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))
       }
     </Grid>
   )

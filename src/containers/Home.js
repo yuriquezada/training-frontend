@@ -8,6 +8,9 @@ import usersDucks from 'reducers/users'
 const { getUsers } = usersDucks.creators
 
 const useStyles = makeStyles(theme => ({
+  bgWhite: {
+    backgroundColor: 'red'
+  },
   root: {
     padding: theme.spacing(4)
   },
@@ -38,36 +41,42 @@ export default function Home({ history }) {
 
   return (
     <Grid className={classes.root} container>
-      {
-        users.data.map(user => (
-          <Grid
-            item
-            key={`user-${user.id}`}
-            lg={4}
-            md={6}
-            xs={12}>
-            <Card className={classes.user}>
-              <CardContent>
-                <Typography variant='h5'>{user.username}</Typography>
-                <CardActions>
-                  <Button
-                    color='primary'
-                    onClick={_handleClickUser(user.id)}
-                    variant='outlined'>
-                    Ver publicaciones
-                  </Button>
-                  <Button
-                    color='primary'
-                    onClick={_handleClickUserProfile(user.id)}
-                    variant='outlined'>
-                    Ver perfil
-                  </Button>
-                </CardActions>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))
-      }
+      <Grid className={classes.bgWhite, 'holita'} container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant='h6'>Mis contactos</Typography>
+        </Grid>
+        {
+          users.data.map(user => (
+            <Grid
+              item
+              key={`user-${user.id}`}
+              lg={4}
+              md={6}
+              xs={12}>
+              <Card className={classes.user}>
+                <CardContent>
+                  <Typography variant='h5'>{user.username}</Typography>
+                  <CardActions>
+                    <Button
+                      color='primary'
+                      onClick={_handleClickUser(user.id)}
+                      variant='outlined'>
+                      Ver publicaciones
+                    </Button>
+                    <Button
+                      color='primary'
+                      onClick={_handleClickUserProfile(user.id)}
+                      variant='outlined'>
+                      Ver perfil
+                    </Button>
+                  </CardActions>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))
+        }
+      </Grid>
+
     </Grid>
   )
 }

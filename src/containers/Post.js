@@ -40,6 +40,8 @@ export default function Post(props) {
   const _handleClickBack = () => {
     history.push('/')
   }
+  console.log('Estos son los posts')
+  console.log(posts.data)
 
   return (
     <Grid className={classes.root} container spacing={2}>
